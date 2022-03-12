@@ -71,7 +71,7 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
 
 ##################################################################################
 
-#Finding the optimal value for lamda and gamma
+#Finding the optimal value for lambda and gamma
     library(tictoc)   #Library function required for timing the code
     tic()	#To start timing the code
     eval <- expand.grid(lambda = seq(0, 1, 0.01),		#The different values of lamda and gamma we want to search
@@ -88,23 +88,23 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
 
 #Improving the efficiency of the code in computing the effective sample size using exact method
 
-  prob_y1 <- function(y1, n1, theta) {
-  #calculating the probability of observing y1 responses in n1 trials 
-  dbinom(y1,n1,theta)  #Binomial distribution conditioned on theta
-  }
+  # prob_y1 <- function(y1, n1, theta) {
+  # calculating the probability of observing y1 responses in n1 trials 
+  # dbinom(y1,n1,theta)  #Binomial distribution conditioned on theta
+  #}
 
-  BOP2_design_improve <- function(lambda, gamma, n1, n2, theta) {
+  #BOP2_design_improve <- function(lambda, gamma, n1, n2, theta) {
   
-  y1_s<- 0: n1  # vectors of possible stage 1 outcomes
+  #y1_s<- 0: n1  # vectors of possible stage 1 outcomes
   
-  c1<- 1 - lambda * (n1 / n2)^gamma   #Go or no go threshold based on decision rule
+  #c1<- 1 - lambda * (n1 / n2)^gamma   #Go or no go threshold based on decision rule
   
-  quits<- pbeta(0.5, y1_s + 0.5,  n1 - y1_s + 0.5)  > c1  # stage 1 data conditioned on the null hypothesis
+  #quits<- pbeta(0.5, y1_s + 0.5,  n1 - y1_s + 0.5)  > c1  # stage 1 data conditioned on the null hypothesis
   
-  y1_probability<- prob_y1(y1_s, n1, theta)    # To calculate probability of each outcome
+  #y1_probability<- prob_y1(y1_s, n1, theta)    # To calculate probability of each outcome
   
-  sum(n1 *quits *  y1_probability  +  n2 * (!quits) * y1_probability)
-  }
+  #sum(n1 *quits *  y1_probability  +  n2 * (!quits) * y1_probability)
+  #}
   
   #######################################################################
   #Estimating the sample size using the improved function (exact method instead of Monte Carlo simulation)
