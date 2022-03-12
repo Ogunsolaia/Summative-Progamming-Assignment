@@ -77,9 +77,9 @@ tic()	#To start timing the code
 eval <- expand.grid(lambda = seq(0, 1, 0.01),		#The different values of lamda and gamma we want to search
                     gamma = seq(0, 1, 0.01))
 
-expectect_sample_size <- rep(NULL, nrow(to_eval))	# The expected sample size is store in a vector for each pair in the grid,  
+expected_sample_size <- rep(NULL, nrow(eval))	# The expected sample size is store in a vector for each pair in the grid,  
 for(i in 1: nrow(eval)) {
-  expectect_sample_size[i] <- BOP2_design(eval[i, 1], eval[i, 2], n1 = 30, n2 = 70)[1]
+  expected_sample_size[i] <- BOP2_design(eval[i, 1], eval[i, 2], n1 = 30, n2 = 70)[1]
 }
 toc()    # To stop timing the algorithm and return the time taken to execute the code
 
@@ -126,4 +126,32 @@ toc()    # To stop timing the algorithm and return the time taken to execute the
   
   #The result obtained is the same as using the Monte Carlo method but the time for its execution has seriously reduced 
   #In other words, the efficiency has been improved.
+  
+  
+  
+  
+  #######################################################################
+  
+  #Finding the optimal value for lambda and gamma using the improved function
+  
+  library(tictoc)   #Library function required for timing the code
+  
+  tic()	#To start timing the code
+  
+  eval <- expand.grid(lambda = seq(0, 1, 0.01),		#The different values of lambda and gamma we want to search
+                      gamma = seq(0, 1, 0.01))
+  
+  
+  expected_sample_size <- rep(NULL, nrow(eval))	# The expected sample size is store in a vector for each pair in the grid,  
+  for(i in 1: nrow(eval)) {
+    expected_sample_size[i] <- BOP2_design_improve(eval[i, 1], eval[i, 2], n1 = 30, n2 = 70, 0.5)[1]
+  }
+  toc()    # To stop timing the algorithm and return the time taken to execute the code
+  
+  eval  # Listing the various combinations of lambda and gamma
+  expected_sample_size  #obtaining the respective effective sample sizes for the combinations of lambda and gamma
+  
+  
+  
+  
   
