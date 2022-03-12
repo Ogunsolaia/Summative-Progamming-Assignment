@@ -106,4 +106,24 @@ toc()    # To stop timing the algorithm and return the time taken to execute the
   sum(n1 *quits *  y1_probability  +  n2 * (!quits) * y1_probability)
   }
   
+  #######################################################################
+  #Estimating the sample size using the improved function (exact method instead of Monte Carlo simulation)
+  #lambda = 0.5, gamma = 0.8,  n1 = 30, n2 = 70, theta = 0.5
+  
+  BOP2_design_improve(0.5, 0.8, 30, 70, 0.5)
+  
+  #######################################################################
+
+  #To calculate the time required to execute the algorithm
+  
+  library(tictoc)   #Library function require for timing the algorithm
+  
+  tic()	#To start timing the algorithm	
+  
+  y <- replicate (20, BOP2_design_improve(0.5, 0.8, 30, 70, 0.5))    #To replicate the procedure 20 time to improve the accuracy 
+  
+  toc()	# To stop timing the algorithm and return the time taken to execute the algorithm
+  
+  #The result obtained is the same as using the Monte Carlo method but the time for its execution has seriously reduced 
+  #In other words, the efficiency has been improved.
   
