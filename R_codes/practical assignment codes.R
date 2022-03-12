@@ -183,3 +183,36 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   testing_prob_y1()
   
   
+  ########################################################################
+  #This cope is mainly and only for plotting the graphs of expected sample sizes under different null hyoothesis
+  # It is the same as the code for obtaining the expected sample size using exact method written above as an improvement instead the Monte Carlo method
+  # I only included a function so that I can vary lambda and gamma for specified values of theta
+  # It is just for convenience 
+  
+  sample_size_graph<-function(lambda, gamma){
+    thetas<- expand.grid(theta = seq(0.1, 0.9, 0.1))		#The different values of lamda and gamma we want to search
+    
+    expected_sample_size <- rep(NULL, nrow(thetas))	# The expected sample size is store in a vector for each pair in the grid,  
+    
+    for(i in 1: nrow(thetas)) {
+      
+      expected_sample_size[i] <- BOP2_design_improve(lambda, gamma, n1 = 30, n2 = 70, thetas[i,1])
+    }
+    
+    return(expected_sample_size)
+    
+  }
+  
+  ########################################################################
+  #Plotting the graph of expected sample sizes versus the null hypothesis for different values of the paramters
+  theta_s<-seq(0.1, 0.9, 0.1)  # values of theta examined 
+  plot(theta_s, sample_size_graph(0.8, 0.3), type ="b", ylab= "Expected Sample Size", xlab="Null Hypothesis", lwd=2, col="red") # To plot the graph of expected samoles again the null hypothesis
+  lines(theta_s, sample_size_graph(0.2, 0.7), type ="b", lwd=2, col="green") # To add other plots for different lambda and gamma 
+  lines(theta_s, sample_size_graph(0.5, 0.5), type ="b", lwd=2, col="purple") ## To add other plots for different lambad and gamma
+  
+  #To add legend
+  legend(.1, 70, c('(lambda=0.8, gamma=0.3)','(lambda=0.5, gamma=0.5)', '(lambda=0.2, gamma=0.7)'),
+         lty=c(1,1,1), col=c('red', 'purple', 'green'))
+  
+  
+  
