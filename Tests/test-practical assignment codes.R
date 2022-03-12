@@ -1,5 +1,5 @@
 
-testthat::test_dir("./tests")
+testthat::test_dir("./Tests")
 
 source("./R_codes/practical assignment codes.R")
 
