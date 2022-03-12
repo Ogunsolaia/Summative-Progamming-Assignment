@@ -56,4 +56,18 @@ BOP2_design(10^4, 0.5, 0.8, 30, 70, 0.5)
 BOP2_design(10^4, 0.5, 0.8, 30, 70, 0.7)
 
 
+##################################################################################
+#To calculate the time required to execute the code
+
+library(tictoc)   #Library function required for timing the code
+
+tic()	#To start timing the code
+
+y <- replicate (20, BOP2_design(10^4, 0.5, 0.8, 30, 70, 0.7))    #To replicate the procedure 20 times to improve the accuracy 
+
+toc()	# To stop timing the algorithm and return the time taken to execute the code
+
+
+
+##################################################################################
 
