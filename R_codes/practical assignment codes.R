@@ -72,6 +72,7 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
 ##################################################################################
 
 #Finding the optimal value for lambda and gamma
+# I commented this out because it takes time to execute, the improve/exact method was used
     #library(tictoc)   #Library function required for timing the code
     #tic()	#To start timing the code
     #eval <- expand.grid(lambda = seq(0, 1, 0.01),gamma = seq(0, 1, 0.01))		#The different values of lamda and gamma we want to search
@@ -155,7 +156,11 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   ########################################################################
   #Unit testing 
   # To test whether the probability function is correct even when the nature of the distribution changes
-  #COMMENT: I added the code for testing whether the probability function is correct even when the nature of the distribution changes.Normally, the prob_y1 is a standard binomial distribution which will always sum to 1, I tested my code by writing the binomial ditribution using real formula instead of inbuilt function so that when the distribution is change one can check whether it sum to one or not.
+  #COMMENT: I added the code for testing whether the probability function is correct even 
+  #when the nature of the distribution changes. Normally, the prob_y1 is a standard binomial 
+  #distribution which will always sum to 1, I tested my code by writing the binomial
+  #distribution using real formula instead of inbuilt function so that when the distribution 
+  #is change one can check whether it sum to one or not.
     
     prob_y1 <- function(y1, n1, theta) {
     #calculating the probability of observing y1 responses in n1 trials 
