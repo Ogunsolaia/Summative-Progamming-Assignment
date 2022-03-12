@@ -37,3 +37,23 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   return(mean(Simulated_Samples)) # return the expected sample size
 }
 
+
+##################################################################################
+
+#Example: carrying out an example of the BOP2 design function
+
+#Example (1) :  Estimating the sample size under the null hypothesis theta = 0.5
+#N = 10000, lambda = 0.5, gamma = 0.8, n1 = 30, n2 = 70
+
+BOP2_design(10^4, 0.5, 0.8, 30, 70, 0.5)
+
+
+##################################################################################
+
+#Example (2) : Estimating the sample size under the alternative hypothesis theta = 0.7
+#N = 10000, lamda = 0.5, gamma = 0.8, n1 = 30, n2 = 70
+
+BOP2_design(10^4, 0.5, 0.8, 30, 70, 0.7)
+
+
+
