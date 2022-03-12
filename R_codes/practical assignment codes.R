@@ -79,14 +79,14 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
 
     expected_sample_size <- rep(NULL, nrow(eval))	# The expected sample size is store in a vector for each pair in the grid,  
     for(i in 1: nrow(eval)) {
-    expected_sample_size[i] <- BOP2_design(eval[i, 1], eval[i, 2], n1 = 30, n2 = 70)[1]
+    expected_sample_size[i] <- BOP2_design(10^4, eval[i, 1], eval[i, 2], n1 = 30, n2 = 70, theta = 0.5)[1]
     }
     toc()    # To stop timing the algorithm and return the time taken to execute the code
 
 
 #######################################################################
 
-#Improving the efficiency of the code in computing the effective sample size
+#Improving the efficiency of the code in computing the effective sample size using exact method
 
   prob_y1 <- function(y1, n1, theta) {
   #calculating the probability of observing y1 responses in n1 trials 
@@ -176,4 +176,5 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   
   #Illustration:
   testing_prob_y1()
+  
   
