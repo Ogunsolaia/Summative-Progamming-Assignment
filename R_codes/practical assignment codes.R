@@ -155,7 +155,15 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   ########################################################################
   #Unit testing 
   # To test whether the probability function is correct even when the nature of the distribution changes
-  
+  #COMMENT: I added the code for testing whether the probability function is correct even when the nature of the distribution changes.Normally, the prob_y1 is a standard binomial distribution which will always sum to 1, I tested my code by writing the binomial ditribution using real formula instead of inbuilt function so that when the distribution is change one can check whether it sum to one or not.
+    
+    prob_y1 <- function(y1, n1, theta) {
+    #calculating the probability of observing y1 responses in n1 trials 
+    #I rewrite the prob_y1 function using formula instead of standard dbinom(y1, n1, theta)
+    
+    choose(n1, y1) * theta^y1 * (1-theta)^(n1-y1) #Binomial distribution with probaility of theta
+    }
+    
     testing_prob_y1 <- function() {
     n1 <- 30			            #Stage 1 sample size
     theta <- seq(0,1, 0.1)    # To state the values of theta which is form 0 to 1 since it is a probability
@@ -164,32 +172,8 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
       sum_prob[i]<-sum(prob_y1(0:n1, n1, theta[i]))	#to sum all probability from 0 to n1 for each theta
     }
     return(all.equal(sum_prob[i], 1))		#To return TRUE if the function sum up to 1 and FALSE otherwise for each theta
-    }
+  }
   
-    # Example
-    testing_prob_y1()
-    
-    ########################################################################
-  
-  #COMMENT: I added the code for testing whether the probability function is correct even when the nature of the distribution changes.Normally, the prob_y1 is a standard binomial distribution which will always sum to 1, I tested my code by writing the binomial ditribution using real formula instead of inbuilt function so that when the distribution is change one can check whether it sum to one or not.
-      prob_y1 <- function(y1, n1, theta) {
-      #calculating the probability of observing y1 responses in n1 trials 
-      choose(n1, y1) * theta^y1 * (1-theta)^(n1-y1) #Binomial distribution with probaility of theta
-      }
-    
-      testing_prob_y1 <- function() {
-      n1 <- 30			            #Stage 1 sample size
-      theta <- seq(0,1, 0.1)    # To state the values of theta which is form 0 to 1 since it is a probability
-      sum_prob<-rep(NA, length(theta)) # Vector to store the sum of probabilities from 0:n1 for each theta
-      for (i in 1:length(theta)){
-        sum_prob[i]<-sum(prob_y1(0:n1, n1, theta[i]))	#to sum all probability from 0 to n1 for each theta
-      }
-      return(all.equal(sum_prob[i], 1))		#To return TRUE if the function sum up to 1 and FALSE otherwise for each theta
-      }
-      
-      testing_prob_y1()
-
-      
-      
-        
+  #Illustration:
+  testing_prob_y1()
   
