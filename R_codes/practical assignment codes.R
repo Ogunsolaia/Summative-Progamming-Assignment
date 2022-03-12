@@ -33,9 +33,9 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
     } else {
       Simulated_Samples[i] <- n2
     }
-  }
-  return(mean(Simulated_Samples)) # return the expected sample size
-}
+    }
+    return(mean(Simulated_Samples)) # return the expected sample size
+    }
 
 
 ##################################################################################
@@ -45,7 +45,7 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
 #Example (1) :  Estimating the sample size under the null hypothesis theta = 0.5
 #N = 10000, lambda = 0.5, gamma = 0.8, n1 = 30, n2 = 70
 
-BOP2_design(10^4, 0.5, 0.8, 30, 70, 0.5)
+    BOP2_design(10^4, 0.5, 0.8, 30, 70, 0.5)
 
 
 ##################################################################################
@@ -53,35 +53,35 @@ BOP2_design(10^4, 0.5, 0.8, 30, 70, 0.5)
 #Example (2) : Estimating the sample size under the alternative hypothesis theta = 0.7
 #N = 10000, lamda = 0.5, gamma = 0.8, n1 = 30, n2 = 70
 
-BOP2_design(10^4, 0.5, 0.8, 30, 70, 0.7)
+    BOP2_design(10^4, 0.5, 0.8, 30, 70, 0.7)
 
 
 ##################################################################################
 #To calculate the time required to execute the code
 
-library(tictoc)   #Library function required for timing the code
+    library(tictoc)   #Library function required for timing the code
 
-tic()	#To start timing the code
+    tic()	#To start timing the code
 
-y <- replicate (20, BOP2_design(10^4, 0.5, 0.8, 30, 70, 0.7))    #To replicate the procedure 20 times to improve the accuracy 
+    y <- replicate (20, BOP2_design(10^4, 0.5, 0.8, 30, 70, 0.7))    #To replicate the procedure 20 times to improve the accuracy 
 
-toc()	# To stop timing the algorithm and return the time taken to execute the code
+    toc()	# To stop timing the algorithm and return the time taken to execute the code
 
 
 
 ##################################################################################
 
 #Finding the optimal value for lamda and gamma
-library(tictoc)   #Library function required for timing the code
-tic()	#To start timing the code
-eval <- expand.grid(lambda = seq(0, 1, 0.01),		#The different values of lamda and gamma we want to search
+    library(tictoc)   #Library function required for timing the code
+    tic()	#To start timing the code
+    eval <- expand.grid(lambda = seq(0, 1, 0.01),		#The different values of lamda and gamma we want to search
                     gamma = seq(0, 1, 0.01))
 
-expected_sample_size <- rep(NULL, nrow(eval))	# The expected sample size is store in a vector for each pair in the grid,  
-for(i in 1: nrow(eval)) {
-  expected_sample_size[i] <- BOP2_design(eval[i, 1], eval[i, 2], n1 = 30, n2 = 70)[1]
-}
-toc()    # To stop timing the algorithm and return the time taken to execute the code
+    expected_sample_size <- rep(NULL, nrow(eval))	# The expected sample size is store in a vector for each pair in the grid,  
+    for(i in 1: nrow(eval)) {
+    expected_sample_size[i] <- BOP2_design(eval[i, 1], eval[i, 2], n1 = 30, n2 = 70)[1]
+    }
+    toc()    # To stop timing the algorithm and return the time taken to execute the code
 
 
 #######################################################################
@@ -151,6 +151,20 @@ toc()    # To stop timing the algorithm and return the time taken to execute the
   eval  # Listing the various combinations of lambda and gamma
   expected_sample_size  #obtaining the respective effective sample sizes for the combinations of lambda and gamma
   
+  
+  ########################################################################
+  #Unit testing 
+  # To test whether the probability function is correct even when the nature of the distribution changes
+  
+  test_prob_y1 <- function() {
+  n1 <- 30			#Stage 1 sample size
+  theta <- seq(0.1,0.9, 0.1)		# To state the values of theta which is form 0 to 1 since it is a probability
+  s <- sum(prob_y1(0:n1, n1, theta))	#to sum all probability from 0 to n1
+  return(all.equal(s, 1))		#To return TRUE if the function sum up to 1 and FALSE otherwise
+  }
+  
+  # Example
+  test_prob_y1()
   
   
   
