@@ -2,7 +2,6 @@ set.seed(20147866) # setting seed for replicability and debugging
 
 #(1) Expected sample size estimation for BOP2 design with decision rules parameters (lamda and gamma) and samples sizes (n1, n2) under the null and alternative hypothesiS
 
-
 BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   # N is the Number of samples to be simulated
   Simulated_Samples <- rep(NA, N) # creating and empty vector to store simulated samples
@@ -129,8 +128,6 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   #In other words, the efficiency has been improved.
   
   
-  
-  
   #######################################################################
   
   #Finding the optimal value for lambda and gamma using the improved function
@@ -181,7 +178,6 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   
   #Illustration:
   testing_prob_y1()
-  
   
   
   ########################################################################  
@@ -267,7 +263,7 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
       
   if (proceed == TRUE){
         
-  y2<- rbinom(1, n2, theta) 		# stage 2 data conditioned on the null hypothesis
+  y2<- rbinom(1, n2, theta1) 		# stage 2 data conditioned on the null hypothesis
         
   #The posterior distribution parameters
   a2 <- 0.5 + y2
@@ -288,8 +284,14 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   }
   
   
+  ########################################################################
   
- 
+  #Examples: Estimating type II error when theta1 = 0.7 (alternative hypothesis)
+  # N = 10^4, lambda = 0.l3, gamma = 0.5, n1 = 30, n2 = 70, theta1 = 0.7
+  
+  TypeII_error(N=10^4, lambda = 0.3,  gamma = 0.5, n1=30, n2 = 70, theta1 = 0.7)
+  
+  
   ########################################################################
   #This code is mainly and only for plotting the graphs of expected sample sizes under different null hyoothesis
   # It is the same as the code for obtaining the expected sample size using exact method written above as an improvement instead the Monte Carlo method
@@ -324,7 +326,6 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   #To add legend
   legend(.1, 70, c('(lambda=0.8, gamma=0.3)','(lambda=0.5, gamma=0.5)', '(lambda=0.2, gamma=0.7)'),
          lty=c(1,1,1), col=c('red', 'purple', 'green'))
-  
   
   
   ########################################################################
