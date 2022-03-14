@@ -189,7 +189,7 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   
     TypeI_error <- function(N, lambda, gamma, n1, n2, theta){
     # N is the Number of samples to be simulated
-    
+    # theta here is the value of theta under the null hypothesis
     # creating and empty vector for cases where we reject the null hypothesis in stage 2, conditioned on stage 1 being passed already
     
     samples1<-rep(NA, N)
