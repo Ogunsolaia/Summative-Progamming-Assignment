@@ -183,7 +183,7 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   ########################################################################  
   #Calculating Type I error for BOP2 Design
   
-    TypeI_error <- function(N, lambda, gamma, n1, n2, theta){
+    TypeI_error<- function(N, lambda, gamma, n1, n2, theta){
     # N is the Number of samples to be simulated
     # theta here is the value of theta under the null hypothesis
     # creating and empty vector for cases where we reject the null hypothesis in stage 2, conditioned on stage 1 being passed already
@@ -287,7 +287,7 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   ########################################################################
   
   #Examples: Estimating type II error when theta1 = 0.7 (alternative hypothesis)
-  # N = 10^4, lambda = 0.l3, gamma = 0.5, n1 = 30, n2 = 70, theta1 = 0.7
+  # N = 10^4, lambda = 0.3, gamma = 0.5, n1 = 30, n2 = 70, theta1 = 0.7
   
   TypeII_error(N=10^4, lambda = 0.3,  gamma = 0.5, n1=30, n2 = 70, theta1 = 0.7)
   
@@ -321,6 +321,7 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   #TypeII_errors[i] <- TypeII_error(10^4, eval[i, 1], eval[i, 2], n1 = 30, n2 = 70, theta = 0.5)[1]
   #}
   #toc()    # To stop timing the algorithm and return the time taken to execute the code
+  
   
   ########################################################################
   #This code is mainly and only for plotting the graphs of expected sample sizes under different null hyoothesis
@@ -364,7 +365,5 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   sample_size_graph(0.8, 0.3) #The result is the same as using the function BOP2_design_improve() for the null hypothesis examined above
   sample_size_graph(0.5, 0.5) # Case where lambda and gamma are equal
   sample_size_graph(0.2, 0.7) # Case where lambda is less than gamma
-  
-  
   
   
