@@ -189,7 +189,7 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   # I only included a function so that I can vary lambda and gamma for specified values of theta
   # It is just for convenience 
   
-  sample_size_graph<-function(lambda, gamma){
+    sample_size_graph<-function(lambda, gamma){
     thetas<- expand.grid(theta = seq(0.1, 0.9, 0.1))		#The different values of lamda and gamma we want to search
     
     expected_sample_size <- rep(NULL, nrow(thetas))	# The expected sample size is store in a vector for each pair in the grid,  
@@ -205,14 +205,26 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   
   ########################################################################
   #Plotting the graph of expected sample sizes versus the null hypothesis for different values of the paramters
+  
   theta_s<-seq(0.1, 0.9, 0.1)  # values of theta examined 
+  
   plot(theta_s, sample_size_graph(0.8, 0.3), type ="b", ylab= "Expected Sample Size", xlab="Null Hypothesis", lwd=2, col="red") # To plot the graph of expected samoles again the null hypothesis
+  
   lines(theta_s, sample_size_graph(0.2, 0.7), type ="b", lwd=2, col="green") # To add other plots for different lambda and gamma 
+  
   lines(theta_s, sample_size_graph(0.5, 0.5), type ="b", lwd=2, col="purple") ## To add other plots for different lambad and gamma
   
   #To add legend
   legend(.1, 70, c('(lambda=0.8, gamma=0.3)','(lambda=0.5, gamma=0.5)', '(lambda=0.2, gamma=0.7)'),
          lty=c(1,1,1), col=c('red', 'purple', 'green'))
   
+  
+  
+  ########################################################################
+  # to obtain or view the expected sample sizes for the different selected Null hypothesis and selected decision parameters
+  #Case where lambda is greater than lambda
+  sample_size_graph(0.8, 0.3) #The result is the same as using the function BOP2_design_improve() for the null hypothesis examined above
+  sample_size_graph(0.5, 0.5) # Case where lambda and gamma are equal
+  sample_size_graph(0.2, 0.7) # Case where lambda is less than gamma
   
   
