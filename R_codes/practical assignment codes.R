@@ -155,7 +155,7 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   
   ########################################################################
   #Unit testing 
-  # To test whether the probability function is correct even when the nature of the distribution changes
+  #To test whether the probability function is correct even when the nature of the distribution changes
   #COMMENT: I added the code for testing whether the probability function is correct even 
   #when the nature of the distribution changes. Normally, the prob_y1 is a standard binomial 
   #distribution which will always sum to 1, I tested my code by writing the binomial
@@ -240,6 +240,54 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   #N = 10^4, lambda = 0.8, gamma = 0.5, n1 = 30, n2 = 70
   
   TypeI_error(N=10^4, lambda = 0.8,  gamma = 0.5, n1 = 30, n2 = 70, theta = 0.5)
+
+    
+  ########################################################################   
+  #Calculating type II error 
+  
+  TypeII_error <- function(N, lambda, gamma, n1, n2, theta1){
+  # N is the Number of samples to be simulated
+  # theta1 is the value of theta under the alternative hypothesis
+  # creating and empty vector for cases where we reject the null hypothesis in stage 2, conditioned on stage 1 being passed already
+  samples1<-rep(NA, N)
+    
+  for (i in 1:N) {
+      
+  y1<- rbinom(1, n1, theta1) # stage 1 data conditioned on the null hypothesis
+      
+  # The posterior distribution parameters
+  a1 <- 0.5 + y1
+  b1 <- 0.5 + n1 - y1
+    
+  prob_futility <- pbeta(0.5, a1, b1)  # Computing the probability of futility
+      
+  c1 <- 1 - lambda * (n1 / n2)^gamma  # Threshold to determine whether to proceed or not based on the decision rule parameters
+      
+  proceed<- prob_futility < c1  # Condition for moving to stage 2
+      
+  if (proceed == TRUE){
+        
+  y2<- rbinom(1, n2, theta) 		# stage 2 data conditioned on the null hypothesis
+        
+  #The posterior distribution parameters
+  a2 <- 0.5 + y2
+  b2 <- 0.5 + n2 - y2
+        
+  prob_futility2 <- pbeta(0.5, a2, b2)	          # Computing the probability of futility at stage 2
+      
+  c2 <- 1 - lambda * (n2/ n2)^gamma               # Threshold to determine whether to proceed or not based on the decision rule parameters
+        
+  samples2[i]<-prob_futility2 < c2
+        
+  } else {
+        
+  samples2[i]<-0
+  }
+  }  
+  return (1 - mean(samples2)) #Type II error is returned. Note that mean(samples2) here is the power of the test 
+  }
+  
+  
   
  
   ########################################################################
