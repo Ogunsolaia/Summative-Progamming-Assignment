@@ -322,10 +322,6 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   #}
   #toc()    # To stop timing the algorithm and return the time taken to execute the code
   
-  
-  #######################################################################
-  
-  
   ########################################################################
   #This code is mainly and only for plotting the graphs of expected sample sizes under different null hyoothesis
   # It is the same as the code for obtaining the expected sample size using exact method written above as an improvement instead the Monte Carlo method
