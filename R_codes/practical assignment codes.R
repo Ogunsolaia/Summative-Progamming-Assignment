@@ -235,9 +235,15 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
     }
   
 
+  ######################################################################## 
+  #Examples: Estimating type I error when theta = 0.5
+  #N = 10^4, lambda = 0.8, gamma = 0.5, n1 = 30, n2 = 70
+  
+  TypeI_error(N=10^4, lambda = 0.8,  gamma = 0.5, n1 = 30, n2 = 70, theta = 0.5)
+  
  
   ########################################################################
-  #This cope is mainly and only for plotting the graphs of expected sample sizes under different null hyoothesis
+  #This code is mainly and only for plotting the graphs of expected sample sizes under different null hyoothesis
   # It is the same as the code for obtaining the expected sample size using exact method written above as an improvement instead the Monte Carlo method
   # I only included a function so that I can vary lambda and gamma for specified values of theta
   # It is just for convenience 
