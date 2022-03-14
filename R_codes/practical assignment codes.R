@@ -295,32 +295,32 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   ##################################################################################
   
   #Finding the optimal value for lambda and gamma for a given Type I error
-  # I commented this out because it takes time to execute.
-  #library(tictoc)   #Library function required for timing the code
-  #tic()	#To start timing the code
-  #values <- expand.grid(lambda = seq(0, 1, 0.01),gamma = seq(0, 1, 0.01))		#The different values of lamda and gamma we want to search
+
+  library(tictoc)   #Library function required for timing the code
+  tic()	#To start timing the code
+  values <- expand.grid(lambda = seq(0, 1, 0.01),gamma = seq(0, 1, 0.01))		#The different values of lamda and gamma we want to search
   
   
-  #TypeI_errors<- rep(NULL, nrow(values))	# Type I error is store in a vector for each pair in the grid,  
-  #for(i in 1: nrow(values)) {
-  #TypeI_errors[i] <- TypeI_error(10^4, eval[i, 1], eval[i, 2], n1 = 30, n2 = 70, theta = 0.5)[1]
-  #}
-  #toc()    # To stop timing the algorithm and return the time taken to execute the code
+  TypeI_errors<- rep(NULL, nrow(values))	# Type I error is store in a vector for each pair in the grid,  
+  for(i in 1: nrow(values)) {
+  TypeI_errors[i] <- TypeI_error(10^4, eval[i, 1], eval[i, 2], n1 = 30, n2 = 70, theta = 0.5)[1]
+  }
+  toc()    # To stop timing the algorithm and return the time taken to execute the code
   
   ##################################################################################
   
   #Finding the optimal value for lambda and gamma for a given Type II error
-  # I commented this out because it takes time to execute.
-  #library(tictoc)   #Library function required for timing the code
-  #tic()	#To start timing the code
-  #values <- expand.grid(lambda = seq(0, 1, 0.01),gamma = seq(0, 1, 0.01))		#The different values of lamda and gamma we want to search
+
+  library(tictoc)   #Library function required for timing the code
+  tic()	#To start timing the code
+  values <- expand.grid(lambda = seq(0, 1, 0.01),gamma = seq(0, 1, 0.01))		#The different values of lamda and gamma we want to search
   
   
-  #TypeII_errors<- rep(NULL, nrow(values))	# Type I error is store in a vector for each pair in the grid,  
-  #for(i in 1: nrow(values)) {
-  #TypeII_errors[i] <- TypeII_error(10^4, eval[i, 1], eval[i, 2], n1 = 30, n2 = 70, theta = 0.5)[1]
-  #}
-  #toc()    # To stop timing the algorithm and return the time taken to execute the code
+  TypeII_errors<- rep(NULL, nrow(values))	# Type I error is store in a vector for each pair in the grid,  
+  for(i in 1: nrow(values)) {
+  TypeII_errors[i] <- TypeII_error(10^4, eval[i, 1], eval[i, 2], n1 = 30, n2 = 70, theta = 0.5)[1]
+  }
+  toc()    # To stop timing the algorithm and return the time taken to execute the code
   
   
   ########################################################################
