@@ -183,6 +183,59 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   testing_prob_y1()
   
   
+  
+  ########################################################################  
+  #Calculating Type I error for BOP2 Design
+  
+    TypeI_error <- function(N, lambda, gamma, n1, n2, theta){
+    # N is the Number of samples to be simulated
+    
+    # creating and empty vector for cases where we reject the null hypothesis in stage 2, conditioned on stage 1 being passed already
+    
+    samples1<-rep(NA, N)
+    
+    for (i in 1:N) {
+      
+    y1<- rbinom(1, n1, theta) # stage 1 data conditioned on the null hypothesis
+      
+    # The posterior distribution parameters
+    
+    a1 <- 0.5 + y1
+    
+    b1 <- 0.5 + n1 - y1
+      
+    prob_futility <- pbeta(0.5, a1, b1)  # Computing the probability of futility
+      
+    c1 <- 1 - lambda * (n1 / n2)^gamma  # Threshold to determine whether to proceed or not based on the decision rule parameters
+      
+    proceed<- prob_futility < c1  # Condition for moving to stage 2
+      
+    if (proceed == TRUE){
+        
+    y2<- rbinom(1, n2, theta) 		# stage 2 data conditioned on the null hypothesis
+        
+    #The posterior distribution parameters
+    a2 <- 0.5 + y2
+    
+    b2 <- 0.5 + n2 - y2
+        
+    prob_futility2 <- pbeta(0.5, a2, b2)	          # Computing the probability of futility at stage 2
+        
+    c2 <- 1 - lambda * (n2/ n2)^gamma               # Threshold to determine whether to proceed or not based on the decision rule parameters
+        
+    samples2[i]<-prob_futility2 < c2
+        
+    } else {
+        
+    samples2[i]<-0
+    
+    }
+    }
+    return (mean(samples2)) #Type 1 error is returned 
+    }
+  
+
+ 
   ########################################################################
   #This cope is mainly and only for plotting the graphs of expected sample sizes under different null hyoothesis
   # It is the same as the code for obtaining the expected sample size using exact method written above as an improvement instead the Monte Carlo method
@@ -226,5 +279,7 @@ BOP2_design <- function(N, lambda, gamma, n1, n2, theta) {
   sample_size_graph(0.8, 0.3) #The result is the same as using the function BOP2_design_improve() for the null hypothesis examined above
   sample_size_graph(0.5, 0.5) # Case where lambda and gamma are equal
   sample_size_graph(0.2, 0.7) # Case where lambda is less than gamma
+  
+  
   
   
